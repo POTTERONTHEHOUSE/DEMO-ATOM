@@ -19,6 +19,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/realtimedemo', methods=['GET'])
+def index():
+    return render_template('indexrealtime.html')
 
 @app.route('/start_task', methods=['POST'])
 def start_task():
