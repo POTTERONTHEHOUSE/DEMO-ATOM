@@ -1,0 +1,156 @@
+
+.out_tab{
+    width:500px;
+    vertical-align:top;
+    margin: 20 20 20 20;
+    display: inline-block;
+}
+.tab{
+    position: relative;
+    padding-right: 10px;
+    display: inline-block;
+    font-family: Helvetica;
+    font-weight: lighter;
+    font-size: 14px;
+    text-align: center;
+    padding: 14px;
+    width:450px;
+    height:70px;
+    border: 2px solid black ;
+    color: black;
+    border-radius: 1px;
+    /*padding-left: 60px;*/
+    cursor: pointer;
+    -moz-transition: all .2s linear;
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+.tooltip2{
+
+}
+
+.tooltip2 .tooltiptext_mode {
+    visibility: hidden;
+    opacity: 0;
+    width: 80%;
+    left: 10%;
+    height: auto;
+    background-color: white;
+    font-size: 20px;
+    color: #999999;
+    text-align: center;
+    border: 1px solid  #999999;
+    border-radius: 6px;
+    padding: 3px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    top:102%;
+    z-index: 15;
+
+    -webkit-transition-duration: 0.6s;
+    -moz-transition-duration: 0.6s;
+    transition-duration: 0.6s;
+}
+
+.tooltip2:hover .tooltiptext_mode {
+
+    opacity: 1;
+    visibility: visible;
+
+}
+
+.content {
+    padding: 0em 3em 0.1em 0.3em;
+    width: 100%;
+}
+
+.buttonlong {
+   
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    
+    padding-right: 1780px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    font-weight:800;
+    font-family: Helvetica;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 100%;
+}
+.button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+}
+
+.button4:hover {
+    background-color: black;
+    color: white;
+}
+
+.row1{
+    position: absolute;
+    left:0;
+    margin-left: 40px;
+}
+
+.row2{
+    position: absolute;
+    right: 0px;
+    margin-right: 40px;
+}
+
+.rowwidth{
+    width: 190px;
+}
+
+.spinicon:hover img{  
+    transform: rotate(180deg);  
+    -webkit-transform: rotate(180deg);  
+    -moz-transform: rotate(180deg);  
+    -o-transform: rotate(180deg);  
+    -ms-transform: rotate(180deg);  
+}  
+img{  
+    margin: 0 auto;  
+    display: block;  
+    transition: all 0.5s ease-in-out;  
+    -webkit-transition: all 0.5s ease-in-out;  
+    -moz-transition: all 0.5s ease-in-out;  
+    -o-transition: all 0.5s ease-in-out;  
+} 
+
+/*table setting*/
+#result-table11
+{
+    vertical-align:top;
+    margin: 20 20 20 20;
+    
+
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	width:70%;
+	border-collapse:collapse;
+}
+#result-table11 td, #result-table11 th 
+{
+	font-size:1em;
+	border:2px solid black;
+	padding:3px 7px 2px 7px;
+}
+#result-table11 th 
+{
+	font-size:1.1em;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:white;
+	color:black;
+}
