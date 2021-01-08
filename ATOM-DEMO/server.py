@@ -21,7 +21,7 @@ def index():
 
 @app.route('/realtimedemo', methods=['GET'])
 def index():
-    return render_template('indexrealtime.html')
+    return render_template('realtimedemo.html')
 
 @app.route('/start_task', methods=['POST'])
 def start_task():
