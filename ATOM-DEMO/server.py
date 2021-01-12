@@ -15,13 +15,13 @@ s = None
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
-@app.route('/index', methods=['GET'])
-def index():
-    return render_template('index.html')
+
+
 
 @app.route('/realtimedemo', methods=['GET'])
-def index():
-    return render_template('realtimedemo.html')
+def realtimedemo():
+    return render_template('realtimedemo.html')    
+
 
 @app.route('/start_task', methods=['POST'])
 def start_task():
@@ -32,7 +32,7 @@ def start_task():
     num_of_machines = req_data['num_of_machines']
     system = req_data['system']
     tmp_uuid = req_data['uuid']
-
+    print(tmp_uuid)
     global token_holding
     global uuid
     global galaxy_conn
@@ -46,7 +46,7 @@ def start_task():
         uuid = tmp_uuid
         token_lock.release()
         galaxy_conn.sendall(json.dumps(req_data).encode())
-        return jsonify(result={"system_is_in_use":False})
+        return jsonify(result={"status":"Okay"})
 
 @app.route('/status_query', methods=['POST'])
 def status_query():

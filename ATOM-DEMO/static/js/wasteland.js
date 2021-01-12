@@ -1,3 +1,12 @@
+ phase="not started";
+ workload=0;
+ metric=0;
+ x = Math.floor(Math.random() * 1000000000);  
+ timestamp=0; 
+ init_timestamp=0;
+ rocks=0;
+ i=0;
+ j=0;
 //datset
 
 
@@ -31,7 +40,7 @@ function hidetables() {
 // for system select&form-control 
 function switchtable(value) {  
   var selectedOption=value.options[value.selectedIndex];  
-	//alert(selectedOption.value);
+	console.log(selectedOption.value);
 	if(selectedOption.value=="graphd"){
     $("#result-table12").hide();
     $("#result-table22").hide();
@@ -155,7 +164,7 @@ function switchmanual() {
 function checkworkload(){
   var x = new Number;
   x = Number(document.getElementById("workload").value);
-  if (isNaN(x) || x < 1 || x > 4096) {
+  if (isNaN(x) || x < 1 || x > 40960) {
     window.alert("Illegal workload! Please enter again!");
    } 
    else {
@@ -175,12 +184,101 @@ function checkbatchnumber() {
   }
 }
 
-//server interface
+// delete the last row for the tables in the rockit function
+function deleterow(x) {
+    var table = document.getElementById(x);
+    console.log("table1",table);
+    var rowCount = table.rows.length;
 
+  table.deleteRow(rowCount -1);
+  console.log("tabledeleterow",table);
+  console.log(rowCount);
+  
+}
+
+//server interface
+function function1(x){
+  if (phase=="end"){return;}
+  $.ajax({
+    url:'http://localhost:80/status_query',
+    async:false,//for the return value
+    type:'POST',
+    contentType: "application/json",
+    data:JSON.stringify({
+      "uuid":x,
+    }),
+    success : function(data){
+        var count = data.result;   
+      
+        phase=count[0].phase;
+        workload=count[0].workload;
+        metric=count[0].metric;
+        var newtimestamp=Date.now()/1000;
+        
+        if (document.getElementById("chsys").value=="pregelplus"&&phase=="training"){
+          //count the number of the training batch
+          j++;
+          var table_body = $("#table-body_pregelplus_tra");
+          $("#pending-row").remove();
+          var tr = $('<tr>' + '<td>' + '<img src="/static/images/check4.png" style="width:20px;margin-right:10px; float:left;"/>' + ' Batch ' + j + '</td><td>'  + workload + '</td><td>' + metric + '</td><td>'  + metric + '</td><td>' + (newtimestamp-timestamp)  + '</td><td>'+ (newtimestamp-init_timestamp) + '</td></tr>');
+        }
+        if (document.getElementById("chsys").value=="pregelplus"&&phase!="training"){
+          i++;
+          table_body= $("#table-body_pregelplus_eval");
+          $("#pending-row").remove();
+          var tr = $('<tr>' + '<td>' + '<img src="/static/images/check4.png" style="width:20px;margin-right:10px; float:left;"/>' + ' Batch ' + i + '</td><td>'  + workload + '</td><td>' + metric + '</td><td>'  + metric + '</td><td>' + (newtimestamp-timestamp) + '</td><td>'+ (newtimestamp-init_timestamp) + '</td></tr>');
+        }
+        else if (document.getElementById("chsys").value=="graphd"&&phase=="training"){
+          //count the number of the training batch
+          j++;
+          table_body= $("#table-body_graphd_tra");
+          $("#pending-row").remove();
+        var tr = $('<tr>' + '<td>' + '<img src="/static/images/check4.png" style="width:20px;margin-right:10px; float:left;"/>' + ' Batch ' + j + '</td><td>'  + workload + '</td><td>' + metric + '</td><td>'+ (newtimestamp-timestamp) + '</td><td>'+ (newtimestamp-init_timestamp) + '</td></tr>');
+      }
+        else if (document.getElementById("chsys").value=="graphd"&&phase!="training"){
+          i++;
+          table_body= $("#table-body_graphd_eval");
+          $("#pending-row").remove();
+        var tr = $('<tr>' + '<td>' + '<img src="/static/images/check4.png" style="width:20px;margin-right:10px; float:left;"/>' + ' Batch ' + i + '</td><td>'  + workload + '</td><td>' + metric + '</td><td>'+ (newtimestamp-timestamp) + '</td><td>'+ (newtimestamp-init_timestamp) + '</td></tr>');
+      }
+         
+        timestamp=newtimestamp;
+        table_body.append(tr);
+        //and then append the loading icon in the following row
+        var trx = $('<tr id="pending-row">' + '<td>' + '<img src="/static/images/load2.gif"/>' +  '</td><td>'  + '</td><td>' +  '</td><td>' +  '</td><td>' +  '</td><td>' + '</td></tr>');
+        table_body.append(trx);
+          },
+
+  })
+}
 //ROCK IT
 function rockit(){
-  var x = Math.floor(Math.random() * 1000000000);
-     //post parameters to the server
+  //Delete the items in the table created by the last rockit
+  if (rocks>0){
+    $( "#table-body_pregelplus_tra tr" ).remove();
+    $( "#table-body_pregelplus_eval tr" ).remove();
+    $( "#table-body_graphd_tra tr" ).remove();
+    $( "#table-body_graphd_eval tr" ).remove();
+    i = 0;
+    j = 0;
+    init_timestamp = timestamp;
+  }
+
+    //show the loading icon for the first time
+    var trx = $('<tr id="pending-row">' + '<td>' + '<img src="/static/images/load2.gif"/>' +  '</td><td>'  + '</td><td>' +  '</td><td>' +  '</td><td>' +  '</td><td>' + '</td></tr>');
+    if(document.getElementById("chsys").value=="graphd"){
+      $("#table-body_graphd_tra").append(trx);
+      //$("#table-body_graphd_tra tr:first").append($('<img src="/static/images/load2.gif"/>'));
+      
+     }else if(document.getElementById("chsys").value=="pregelplus"){
+      //$("#table-body_pregelplus_tra tr:first").append($('<img src="/static/images/load2.gif"/>'));
+      $("#table-body_pregelplus_tra").append(trx);
+      
+     }   
+  
+
+  x = Math.floor(Math.random() * 1000000000);   
+  //post parameters to the server
      $.ajax({
        
       url:'http://localhost:80/start_task',
@@ -189,7 +287,7 @@ function rockit(){
       contentType: "application/json",
       data:JSON.stringify({
         "dataset":document.getElementById("chdataset").value,
-        "workload":document.getElementById("workload").value,
+        "workload":parseInt(document.getElementById("workload").value),
         "algorithm":document.getElementById("chalg").value,
         "num_of_machines":document.getElementById("clusizeresult").value,
         "system":document.getElementById("chsys").value,
@@ -197,69 +295,53 @@ function rockit(){
       }),
       
       success : function(data){
-        console.log(data);
-          console.log(data.result);
-          //alert(JSON.stringify(console.log(data.result), null, 2));
-          
+            
+            if (data.result.status!="Okay"){
+              alert(data.result.status);
+              return;
+            }
+            
+            var i=1;
+            timestamp=Date.now()/1000;
+            init_timestamp = timestamp;
+            while(phase!="end"){
+             // setTimeout(function(){function1(x)},1000*i);
+             function1(x)
+             i++;
+            }
+            $("#pending-row").remove();
           },
 
-//但是怎么把console里的内容写到alert里,可以用这个函数吗
-      error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        alert(XMLHttpRequest.status);
-        alert(XMLHttpRequest.readyState);
-        alert(textStatus); // paser error;
-    },
     })
-
-
+    phase="not started";
+    rocks++;//To count the number of the clicks on rockit; when rocks>=1, rock it has to clear the tables before appending new metric items for new settings.
 }
  
 
-/* create table      
-var count = result["result"];
-        
-var table_body = $("#result-table11");
-// if (){}
- for (var i = 1; i <= count.length; i++){
-   var tr = $('<tr><th scope="row">' + '</th><td>' + count[i-1][0] + '</td><td>' + count[i-1][1] + '</td></tr>'+ count[i-1][2] + '</td></tr>');
-   setTimeout(function(){    },500)
-   table_body.append(tr[0]);
- }
- 
- var table_body = $("#result-table12");
-// if (){}
- for (var i = 1; i <= count.length; i++){
-   var tr = $('<tr><th scope="row">' + '</th><td>' + count[i-1][0] + '</td><td>' + count[i-1][1] + '</td></tr>'+ count[i-1][2] + '</td></tr>');
-   setTimeout(function(){    },500)
-   table_body.append(tr[0]);
- }
+
+      
+window.addEventListener('load', (event) => {
+ // $('#graphd12').focus();
+//   if ("createEvent" in document) {
+//     var evt = document.createEvent("HTMLEvents");
+//     evt.initEvent("change", false, true);
+//     $('#chsys').dispatchEvent(evt);
+// }
+// else
+//     $('#chsys').fireEvent("onchange");
+$('#chdataset')[0].selectedIndex = 1;
+
+$('#chsys')[0].selectedIndex = 0;
+$('#chsys').trigger('onchange');
+
+$('#chalg')[0].selectedIndex = 1;
 
 
-           (function () {
-            var old = console.log;
-            var logger = document.getElementById('log');
-            console.log = function (message) {
-                if (typeof message == 'object') {
-                    logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-                } else {
-                    logger.innerHTML += message + '<br />';
-                }
-            }
-        })();
+$('#clusizeresult')[0].selectedIndex = 3;
+$('#clusizeresult').trigger('onchange');
 
-        <tr>
-在表中插图片
- <td style="width:20px"> 。。。</td>
 
- <td style="width:20px"><img src="pic.jpg"></td>
+$('#enatom')[0].selectedIndex = 0;
+$('#enatom').trigger('onchange');
 
- </tr>
- */
-
-/*test zone*/
-
-	TESTER = document.getElementById('tester');
-	Plotly.newPlot( TESTER, [{
-	x: [1, 2, 3, 4, 5],
-	y: [1, 2, 4, 8, 16] }], {
-	margin: { t: 0 } } );
+});

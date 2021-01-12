@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{url_for('static',filename="/images/ico/SEAS-favicon.png")}}" rel="icon" type="image/x-icon">
+    <link href="/images/ico/SEAS-favicon.png" rel="icon" type="image/x-icon">
 
     <title>ATOM @ CUHKSZ</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="{{url_for('static',filename="/css/bootstrap.min.css")}}" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{url_for('static',filename="/css/main0.css")}}" rel="stylesheet">
-    <link href="{{url_for('static',filename="/css/lsm_button.css")}}" rel="stylesheet">
-    <link href="{{url_for('static',filename="/css/tooltip.css")}}" rel="stylesheet">
-    <link href="{{url_for('static',filename="/css/wasteland.css")}}" rel="stylesheet">
+    <link href="/static/css/main0.css" rel="stylesheet">
+    <link href="/static/css/lsm_button.css" rel="stylesheet">
+    <link href="/static/css/tooltip.css" rel="stylesheet">
+    <link href="/static/css/wasteland.css" rel="stylesheet">
 
     <!-- Custom JS -->
     <script async="" src="http://www.google-analytics.com/analytics.js"></script><script async="" src="http://www.google-analytics.com/analytics.js"></script><script async="" src="http://www.google-analytics.com/analytics.js"></script>
    <!-- <script src="js/lsm_bush_in_action.js"></script>
     <script src="js/autoRerun.js"></script>-->
-    <script src="{{url_for('static',filename="/js/wasteland.js")}}"></script>
+    <script src="/static/js/wasteland.js"></script>
     <!--I added the last one above and the following 2 for the errro $ is not defined. But I am not sure they would always work. If it fails then go to stackoverflow for other headers.--></head><body id="page-top" class="index" data-new-gr-c-s-check-loaded="14.990.0" data-gr-ext-installed="">&gt;
    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -30,12 +30,7 @@
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>-->
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <!-- plotly JS -->
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="http://stack.gl"></script>
-
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="{{url_for('static',filename="/js/plotly.js")}}"></script>
+    
     
 
 
@@ -117,7 +112,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                    <img class="img-responsive img-centered" src="{{url_for('static',filename="/images/CRDB.png")}}" alt="ATOM">
+                    <img class="img-responsive img-centered" src="/static/images/CRDB.png" alt="ATOM">
                 </div>
             </div>
             <div class="row">
@@ -224,7 +219,7 @@
                         <div class="tab  tooltip2" id="dataset-trigger">
                             <div class="row">
                                 <div class="row row1" style="display:inline-block;">
-                                <span><img class="img-responsive img-centered" style="width:40px;display:inline-block;" src="{{url_for('static',filename="/images/Align.png")}}">
+                                <span><img class="img-responsive img-centered" style="width:40px;display:inline-block;" src="/static/images/Align%20vertical%20bottom.png">
                                     </span>
                                 <span style="cursor: pointer; font-size: 25px; font-weight: bold;" id="data-text"> Dataset:</span> 
                                 </div>
@@ -249,7 +244,7 @@
                         <div class="row">
                         <div id="sys-trigger" style="display:inline-block;">
                             <div class="row row1">
-                            <span><img class="img-responsive img-centered" style="width:40px; display:inline-block;" src="{{url_for('static',filename="/images/flow.png")}}"></span>
+                            <span><img class="img-responsive img-centered" style="width:40px; display:inline-block;" src="/static/images/flow.png"></span>
                             <span style="cursor: pointer; font-size: 25px; font-weight: bold;" id="systext"> Systems:</span>
                             </div>
                         </div>
@@ -274,7 +269,7 @@
                         <div class="tab  tooltip2" id="dataset-trigger">
                         <div class="row">
                             <div class="row row1" style="display:inline-block;">
-                            <span><img class="img-responsive img-centered" style="width:40px;display:inline-block;" src="{{url_for('static',filename="/images/filter.png")}}">
+                            <span><img class="img-responsive img-centered" style="width:40px;display:inline-block;" src="/static/images/filter.png">
                                 </span>
                             <span style="cursor: pointer; font-size: 25px; font-weight: bold;" id="data-text"> Algorithm:</span> 
                             </div>
@@ -300,7 +295,7 @@
                     <div class="trigger out_tab">
                         <div class="tab  tooltip2" id="dataset-trigger">
                             <div class="row row1" style="display:inline-block;">
-                            <div style="display:inline-block;"><img class="img-responsive img-centered" style="width:40px;display:inline-block;" src="{{url_for('static',filename="/images/hhh.png")}}">
+                            <div style="display:inline-block;"><img class="img-responsive img-centered" style="width:40px;display:inline-block;" src="/static/images/hhh.png">
                             </div>
                             <div style="display:inline-block; cursor: pointer; font-size: 25px; font-weight: bold; vertical-align:top;" id="clusize-text"> Cluster:</div>
                             </div> 
@@ -342,7 +337,7 @@
                         <div class="row">
                         <div class="row1" id="wl-trigger" style="display:inline-block;left: 10px;">
                             <div class="row">
-                            <span><img class="img-responsive img-centered" style="width:40px; display:inline-block;" src="{{url_for('static',filename="/images/wl.png")}}"></span>
+                            <span><img class="img-responsive img-centered" style="width:40px; display:inline-block;" src="/static/images/wl.png"></span>
                             <span style="cursor: pointer; font-size: 25px; font-weight: bold;" id="wl-text"> Workload:</span>
                             </div>
                         </div>
@@ -369,7 +364,7 @@
                                 <div class="row row1" style="left: 10px;">
                                     <div id="nob-trigger" style="display:inline-block;">
                                         <div class="row">
-                                        <span><img class="img-responsive img-centered" style="width:40px; display:inline-block;" src="{{url_for('static',filename="/images/nob.png")}}"></span>
+                                        <span><img class="img-responsive img-centered" style="width:40px; display:inline-block;" src="/static/images/nob.png"></span>
                                         <span style="cursor: pointer; font-size: 25px; font-weight: bold;" id="nob-text"> Batches:</span>
                                         </div>
                                     </div>
@@ -391,7 +386,7 @@
                                 <div class="row row1" style="left: 10px;">
                                     <div id="nob-trigger" style="display:inline-block;">
                                         <div class="row">
-                                            <span><img class="img-responsive img-centered" onclick="switchmanual()" style="width:40px; display:inline-block;" src="{{url_for('static',filename="/images/nob.png")}}"></span>
+                                            <span><img class="img-responsive img-centered" onclick="switchmanual()" style="width:40px; display:inline-block;" src="/static/images/nob.png"></span>
                                             <span style="cursor: pointer; font-size: 25px; font-weight: bold;" id="nob-text"> Batches:</span>
                                         </div>
                                     </div>
@@ -528,9 +523,6 @@
         <hr>
 
     </div>
-<!--Test Zone-->
-<div id="tester" style="width:600px;height:250px;"></div>
-
     </section>
 
 
@@ -591,23 +583,23 @@
     <!-- End of Google Analytics Script -->
 
     <!-- jQuery -->
-    <script src="{{url_for('static',filename="/js/jquery.js")}}"></script>
+    <script src="/static/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{{url_for('static',filename="/js/bootstrap.min.js")}}"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="{{url_for('static',filename="/js/classie.js")}}"></script>
-    <script src="{{url_for('static',filename="/js/cbpAnimatedHeader.js")}}"></script>
+    <script src="/static/js/classie.js"></script>
+    <script src="/static/js/cbpAnimatedHeader.js"></script>
   <!--  <script src="js/lambertw.js"></script>-->
 
     <!-- Contact Form JavaScript -->
-    <script src="{{url_for('static',filename="/js/jqBootstrapValidation.js")}}"></script>
+    <script src="/static/js/jqBootstrapValidation.js"></script>
     <!-- <script src="js/contact_me.js"></script> -->
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{url_for('static',filename="/js/main.js")}}"></script>
+    <script src="/static/js/main.js"></script>
    <!-- <script src="js/show_more.js"></script> 
     <script>
         setTimeout(init, 200);
@@ -615,7 +607,7 @@
 
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{url_for('static',filename="/js/disappearMenu.js")}}"></script>
+    <script src="/static/js/disappearMenu.js"></script>
 
     <!-- Start of StatCounter Code for Default Guide 这里
     <script type="text/javascript">
